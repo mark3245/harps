@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты | ХарпСтрой{% endblock %}
+
+{% block content %}
+<section class="contacts-section py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Наши контакты</h1>
+        
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="contact-info">
+                    <h3 class="mb-4">Контактная информация</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> <strong>Телефон:</strong> +7 (993) 020-40-20</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> <strong>Телефон офиса:</strong> +7 (383) 212-18-12</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> <strong>Email:</strong> 2121812@list.ru</li>
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> <strong>Адрес:</strong> г. Новосибирск, ул. Толстого, д. 133, 4 этаж, офис 404</li>
+                        <li class="mb-3"><i class="fas fa-clock me-2"></i> <strong>Режим работы:</strong> Пн-Пт: 9:00-18:00, Сб: 10:00-15:00</li>
+                    </ul>
+                    
+                    <div class="social-links mt-4">
+                        <a href="https://wa.me/79930204020" class="btn btn-success me-2 mb-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="contact-form">
+                    <h3 class="mb-4">Оставьте заявку</h3>
+                    <form id="contactForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" name="phone" placeholder="Телефон" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email (необязательно)">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="message" rows="4" placeholder="Ваше сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-5">
+            <h3 class="mb-4">Мы на карте</h3>
+            <div class="ratio ratio-16x9">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A30a4e90c9d319f4df10a160fb15a65a7cd82a88f75d33e8238f27673f07fc494&amp;source=constructor" width="600" height="400" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

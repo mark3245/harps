@@ -1,0 +1,523 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/calculator.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="display-4 fw-bold mb-4">В Новосибирске и Новосибирской области строим надёжные заборы под ключ</h1>
+        <p class="lead mb-5">Профессиональный монтаж с гарантией качества</p>
+        <button class="btn btn-primary btn-lg calculator-start px-4 py-2">
+            Рассчитать стоимость
+        </button>
+    </div>
+</section>
+
+<!-- Calculator Modal -->
+<div class="modal fade" id="calculatorModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Калькулятор забора</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="calculator-modal">
+                <div class="calculator-steps">
+                    <!-- Шаг 1: Тип ограждения -->
+                    <div class="calculator-step" data-step="1">
+                        <h4>Выберите тип ограждения</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/proflist.jpg" class="card-img-top" alt="Из профлиста">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="proflist">
+                                            Из профлиста
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/euro.jpg" class="card-img-top" alt="Из евроштакетника">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="euro">
+                                            Из евроштакетника
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/3d.jpg" class="card-img-top" alt="3D ограждения">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="3d">
+                                            «3D» ограждения
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/jalousie.jpg" class="card-img-top" alt="Жалюзийные заборы">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="jalousie">
+                                            Жалюзийные заборы
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/planken.jpg" class="card-img-top" alt="Из планкена">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="planken">
+                                            Из планкена
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/rabica.jpg" class="card-img-top" alt="Из сетки рабицы">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="rabica">
+                                            Из сетки рабицы
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card answer-card h-100">
+                                    <img src="images/section.jpg" class="card-img-top" alt="Секционные заборы">
+                                    <div class="card-body">
+                                        <button class="btn btn-outline-primary w-100 answer-btn" 
+                                                data-question="fence_type" 
+                                                data-value="section">
+                                            Секционные заборы
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 2: Длина забора -->
+                    <div class="calculator-step" data-step="2" style="display:none;">
+                        <h4>Общая длина забора (включая ворота и калитку)</h4>
+                        <div class="slider-container mt-4">
+                            <input type="range" min="20" max="500" value="50" class="form-range" id="fenceLengthSlider">
+                            <div class="d-flex justify-content-between mt-2">
+                                <span>20 м</span>
+                                <span id="fenceLengthValue">50 м</span>
+                                <span>500 м</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-4 next-step">Далее</button>
+                    </div>
+              
+                    <!-- Шаг 3: Высота забора -->
+                    <div class="calculator-step" data-step="3" style="display:none;">
+                        <h4>Выберите высоту забора</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="1.2">
+                                    1,2 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="1.5">
+                                    1,5 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="1.8">
+                                    1,8 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="2.0">
+                                    2 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="2.2">
+                                    2,2 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="2.5">
+                                    2,5 метра
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="height" 
+                                        data-value="3.0">
+                                    3 метра
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 4: Тип ворот -->
+                    <div class="calculator-step" data-step="4" style="display:none;">
+                        <h4>Какие ворота желаете?</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_type" 
+                                        data-value="swing">
+                                    Ворота распашные
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_type" 
+                                        data-value="sliding">
+                                    Ворота откатные
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_type" 
+                                        data-value="automation">
+                                    Автоматика для ворот
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_type" 
+                                        data-value="standard_gate">
+                                    Калитка «стандарт»
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_type" 
+                                        data-value="premium_gate">
+                                    Калитка «Премиум»
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 5: Калитка -->
+                    <div class="calculator-step" data-step="5" style="display:none;">
+                        <h4>Нужна калитка?</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_count" 
+                                        data-value="0">
+                                    Без калитки
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_count" 
+                                        data-value="1">
+                                    Калитка нужна 1 шт
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="gate_count" 
+                                        data-value="2">
+                                    Калитка нужна 2 шт
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 6: Способ установки -->
+                    <div class="calculator-step" data-step="6" style="display:none;">
+                        <h4>Способ установки столбов</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="crushed_stone">
+                                    Забутовка (трамбовка щебнем)
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="concreting">
+                                    Бетонирование
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="screw_piles">
+                                    Винтовые сваи
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="strip_foundation">
+                                    Ленточный фундамент
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="brick_pillars">
+                                    Кирпичные столбы
+                                </button>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="installation" 
+                                        data-value="measurer">
+                                    Затрудняюсь ответить, нужен выезд замерщика
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 7: Сроки установки -->
+                    <div class="calculator-step" data-step="7" style="display:none;">
+                        <h4>Когда планируете установку забора?</h4>
+                        <div class="progress mb-3">
+                            <div class="progress-bar" style="width: 78%">78%</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="timing" 
+                                        data-value="week">
+                                    В течение недели
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="timing" 
+                                        data-value="month">
+                                    В этом месяце
+                                </button>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <button class="btn btn-outline-secondary w-100 answer-btn" 
+                                        data-question="timing" 
+                                        data-value="next_month">
+                                    Через месяц
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <!-- Шаг 8: Населенный пункт -->
+                    <div class="calculator-step" data-step="8" style="display:none;">
+                        <h4>Укажите название населенного пункта</h4>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="locationInput" placeholder="Например: Новосибирск">
+                        </div>
+                        <button class="btn btn-primary next-step">Далее</button>
+                    </div>
+              
+                    <!-- Финальный шаг: Контактные данные -->
+                    <div class="calculator-step final-step" data-step="final" style="display:none;">
+                        <h4>Оставьте контакты для расчета</h4>
+                        <form id="calculatorForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" name="phone" placeholder="Телефон" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Email (необязательно)">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Получить расчет</button>
+                        </form>
+                    </div>
+              
+                    <!-- Благодарность -->
+                    <div class="calculator-step thank-you" data-step="thank-you" style="display:none;">
+                        <div class="text-center">
+                            <i class="fas fa-check-circle text-success mb-3" style="font-size: 4rem;"></i>
+                            <h4>Спасибо за заявку!</h4>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Advantages Section -->
+<section class="advantages-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Наши преимущества</h2>
+        <div class="row">
+            {% for advantage in advantages %}
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="{{ advantage.icon }}"></i>
+                    </div>
+                    <h4>{{ advantage.title }}</h4>
+                    <p>{{ advantage.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Fence Types Section -->
+<section class="fence-types-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Виды ограждений</h2>
+        <div class="row">
+            {% for fence in fence_types %}
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="fence-card">
+                    <img src="{{ fence.image.url }}" alt="{{ fence.name }}" class="img-fluid">
+                    <div class="fence-card-body">
+                        <h4>{{ fence.name }}</h4>
+                        <p>{{ fence.description|truncatechars:100 }}</p>
+                        <p class="price">от {{ fence.price }} ₽/м.п.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'price' %}" class="btn btn-primary">Все виды и цены</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Видеоотзывы наших клиентов</h2>
+            <p class="lead">Реальные мнения о нашей работе</p>
+        </div>
+        
+        <div class="owl-carousel testimonial-carousel">
+            {% for testimonial in testimonials %}
+            <div class="testimonial-item">
+                <video controls {% if testimonial.thumbnail %}poster="{{ testimonial.thumbnail.url }}"{% endif %}>
+                    <source src="{{ testimonial.video_file.url }}" type="video/mp4">
+                </video>
+                
+                <div class="testimonial-rating">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= testimonial.rating %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <p class="testimonial-text">{{ testimonial.text|truncatechars:120 }}</p>
+                
+                <div class="testimonial-author">
+                    {% if testimonial.author_photo %}
+                    <img src="{{ testimonial.author_photo.url }}" alt="{{ testimonial.name }}">
+                    {% else %}
+                    <div class="author-placeholder">
+                        <i class="fas fa-user-circle fa-2x"></i>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <h5 class="mb-0">{{ testimonial.name }}</h5>
+                        <small class="text-muted">{{ testimonial.created_at|date:"d.m.Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Остались вопросы?</h2>
+                <p>Оставьте заявку и наш специалист свяжется с вами для консультации</p>
+                <form id="mainContactForm" class="mt-4">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" name="phone" placeholder="Телефон" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Email (необязательно)">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="message" rows="3" placeholder="Ваш вопрос"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="contact-info">
+                    <h4>Контакты</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone me-2"></i> +7 (993) 020-40-20</li>
+                        <li><i class="fas fa-phone me-2"></i> +7 (383) 212-18-12</li>
+                        <li><i class="fas fa-envelope me-2"></i> 2121812@list.ru</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> г. Новосибирск, ул. Толстого, д. 133, 4 этаж, офис 404</li>
+                    </ul>
+                    <div class="social-links mt-4">
+                        <a href="https://wa.me/79930204020" class="btn btn-success me-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

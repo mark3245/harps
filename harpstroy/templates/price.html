@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Стоимость услуг | ХарпСтрой{% endblock %}
+
+{% block content %}
+<section class="price-section py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Стоимость наших услуг</h1>
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Ограждения</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Тип ограждения</th>
+                                <th>Описание</th>
+                                <th>Цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fence in fence_types %}
+                            <tr>
+                                <td>{{ fence.name }}</td>
+                                <td>{{ fence.description }}</td>
+                                <td>от {{ fence.price }} ₽/м.п.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4">Входная группа</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Тип конструкции</th>
+                                <th>Описание</th>
+                                <th>Цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for gate in gate_types %}
+                            <tr>
+                                <td>{{ gate.name }}</td>
+                                <td>{{ gate.description }}</td>
+                                <td>от {{ gate.price }} ₽</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert alert-warning mt-5">
+            <h4 class="alert-heading">Нашли ограждение дешевле?</h4>
+            <p>Помните: дешевле — не значит лучше! Качественное ограждение не может стоить слишком дешево, ведь за низкой ценой часто скрываются слабые материалы и некачественная работа.</p>
+            <p class="mb-0">Устранение последствий таких "экономий" обычно обходится гораздо дороже, чем своевременная установка надежного ограждения. Доверьте безопасность своего участка профессионалам — выбирайте качество, проверенное временем!</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
